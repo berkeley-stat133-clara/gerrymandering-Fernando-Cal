@@ -4,4 +4,46 @@ format: typst
 ---
 
 ```{r}
+install.packages("dplyr")
+install.packages("tidyverse")
 
+library(dplyr)
+library(tidyverse)
+# data cleaning
+
+# FIPS = County FPIS code
+# SVPREC = unique precinct ID
+# CDDIST = congresional district number
+# ADDIST = state assembly district number
+# SDDIST = state senate district number
+# BEDIST = board of equalization District number 
+
+# TOTRE = Total regisitered voters in the precinct 
+# DEMREG, REPREG = Registered voters by political party affilation 
+# TOTVOTE = TOtal Ballots cast
+# ABSVOTE = Toal Absentee Ballots Cast 
+
+# CNGDEM01 = Congresional Race, Democraat Candidate 01 (votes for the first listed democractic candidate in the congressional race)
+
+#CNGREP01 = Congressional Race, Republican, Candidate 01 
+
+# PRSDEM01 PRS(President) DEMocrat candidaete 01 (votes for the democratic presidential candidate)
+
+# PR_32_N, PR_32_Y = PRoposition 32, No or Yes (votes for and against prop 32)
+
+
+g24_sov <- read.csv("/Users/fernando/Desktop/gerrymandering-Fernando-Cal/data/g24_sov_by_g24_svprec.csv")
+
+# check data types for the following columns 
+typeof(g24_sov$CNGDEM01) # character
+typeof(g24_sov$CNGDEM02) # character 
+typeof(g24_sov$CNGIND01) # character 
+typeof(g24_sov$CNGREP01	) # character 
+typeof(g24_sov$CNGREP02	) # character 
+
+g24_sov <- g24_sov |>
+    mutate_at(c("CNGDEM01", "CNGDEM02", "CNGIND01", "CNGREP01", "CNGREP02"), as.numeric)
+
+
+
+```
